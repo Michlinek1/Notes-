@@ -42,6 +42,7 @@
             this.newWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,7 @@
             this.fontColodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoSaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.encryptDecryptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,7 +123,8 @@
             this.newWindowToolStripMenuItem,
             this.closeToolStripMenuItem,
             this.replaceToolStripMenuItem,
-            this.checkToolStripMenuItem});
+            this.checkToolStripMenuItem,
+            this.encryptDecryptToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -185,6 +187,13 @@
             this.replaceToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.replaceToolStripMenuItem.Text = "Replace";
             this.replaceToolStripMenuItem.Click += new System.EventHandler(this.replaceToolStripMenuItem_Click);
+            // 
+            // checkToolStripMenuItem
+            // 
+            this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
+            this.checkToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.checkToolStripMenuItem.Text = "check";
+            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -333,12 +342,12 @@
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
-            // checkToolStripMenuItem
+            // encryptDecryptToolStripMenuItem
             // 
-            this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
-            this.checkToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.checkToolStripMenuItem.Text = "check";
-            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
+            this.encryptDecryptToolStripMenuItem.Name = "encryptDecryptToolStripMenuItem";
+            this.encryptDecryptToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.encryptDecryptToolStripMenuItem.Text = "Encrypt/Decrypt";
+            this.encryptDecryptToolStripMenuItem.Click += new System.EventHandler(this.encryptDecryptToolStripMenuItem_Click);
             // 
             // TxtViewer
             // 
@@ -397,5 +406,6 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem replaceToolStripMenuItem;
         private ToolStripMenuItem checkToolStripMenuItem;
+        private ToolStripMenuItem encryptDecryptToolStripMenuItem;
     }
 }

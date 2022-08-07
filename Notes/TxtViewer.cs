@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
@@ -238,6 +239,17 @@ namespace Notes
         private void checkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(text);
+        }
+
+        private void encryptDecryptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(@"C:\Users\Michal\Desktop\zadaniainformatyaa\encryptor\main2.py"))
+            {
+                MessageBox.Show("You have to download the encryptor from: https://github.com/Michlinek1/Encryptor-Decryptor", "Error!");
+                Process.Start(new ProcessStartInfo("https://github.com/Michlinek1/Encryptor-Decryptor") { UseShellExecute = true });
+                return;
+            }
+            Process.Start(new ProcessStartInfo(@"C:\Users\Michal\Desktop\zadaniainformatyaa\encryptor\main.py") { UseShellExecute = true });
         }
     }
     }
