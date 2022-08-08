@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
@@ -291,7 +292,8 @@ namespace Notes
                     textBox1.Text += File.ReadLines(path).ElementAtOrDefault(2).ToString();
                     break;
                 case Keys.F4:
-                textBox1.Text += File.ReadLines(path).ElementAtOrDefault(3).ToString();
+
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(3).ToString();
                     break;
                 case Keys.F6:
                     textBox1.Text += File.ReadLines(path).ElementAtOrDefault(4).ToString();
@@ -318,6 +320,26 @@ namespace Notes
         {
             Macros macrosform = new Macros();
             macrosform.Show();
+        }
+
+        private void restoreDefaultZoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            labelzoom.Text = "100";
+            textBox1.Font = new Font(textBox1.Font.Name, 9);
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printDialog1.Document = printDocument1;
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+            {
+                printDocument1.Print();
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            e.Graphics.DrawString(textBox1.Text, textBox1.Font, Brushes.Black, 150,125);
         }
     }
     }
