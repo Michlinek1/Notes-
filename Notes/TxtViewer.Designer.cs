@@ -41,11 +41,11 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.encryptDecryptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightToLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,8 +59,8 @@
             this.customColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontColodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoSaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.macrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.encryptDecryptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,13 +69,14 @@
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(12, 37);
+            this.textBox1.Location = new System.Drawing.Point(8, 37);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(776, 384);
             this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // label1
             // 
@@ -122,8 +123,6 @@
             this.newToolStripMenuItem,
             this.newWindowToolStripMenuItem,
             this.closeToolStripMenuItem,
-            this.replaceToolStripMenuItem,
-            this.checkToolStripMenuItem,
             this.encryptDecryptToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
@@ -181,25 +180,19 @@
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // replaceToolStripMenuItem
+            // encryptDecryptToolStripMenuItem
             // 
-            this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
-            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.replaceToolStripMenuItem.Text = "Replace";
-            this.replaceToolStripMenuItem.Click += new System.EventHandler(this.replaceToolStripMenuItem_Click);
-            // 
-            // checkToolStripMenuItem
-            // 
-            this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
-            this.checkToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.checkToolStripMenuItem.Text = "check";
-            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
+            this.encryptDecryptToolStripMenuItem.Name = "encryptDecryptToolStripMenuItem";
+            this.encryptDecryptToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.encryptDecryptToolStripMenuItem.Text = "Encrypt/Decrypt";
+            this.encryptDecryptToolStripMenuItem.Click += new System.EventHandler(this.encryptDecryptToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fontToolStripMenuItem,
-            this.timeDataToolStripMenuItem});
+            this.timeDataToolStripMenuItem,
+            this.rightToLeftToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -218,6 +211,14 @@
             this.timeDataToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.timeDataToolStripMenuItem.Text = "Time/Data";
             this.timeDataToolStripMenuItem.Click += new System.EventHandler(this.timeDataToolStripMenuItem_Click);
+            // 
+            // rightToLeftToolStripMenuItem
+            // 
+            this.rightToLeftToolStripMenuItem.CheckOnClick = true;
+            this.rightToLeftToolStripMenuItem.Name = "rightToLeftToolStripMenuItem";
+            this.rightToLeftToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.rightToLeftToolStripMenuItem.Text = "Right to Left";
+            this.rightToLeftToolStripMenuItem.Click += new System.EventHandler(this.rightToLeftToolStripMenuItem_Click);
             // 
             // formatToolStripMenuItem
             // 
@@ -250,7 +251,8 @@
             this.zoomToolStripMenuItem,
             this.changeColorToolStripMenuItem,
             this.fontColodToolStripMenuItem,
-            this.autoSaveToolStripMenuItem});
+            this.autoSaveToolStripMenuItem,
+            this.macrosToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -328,6 +330,14 @@
             this.autoSaveToolStripMenuItem.Text = "Auto Save";
             this.autoSaveToolStripMenuItem.Click += new System.EventHandler(this.autoSaveToolStripMenuItem_Click);
             // 
+            // macrosToolStripMenuItem
+            // 
+            this.macrosToolStripMenuItem.CheckOnClick = true;
+            this.macrosToolStripMenuItem.Name = "macrosToolStripMenuItem";
+            this.macrosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.macrosToolStripMenuItem.Text = "Macros";
+            this.macrosToolStripMenuItem.Click += new System.EventHandler(this.macrosToolStripMenuItem_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -341,13 +351,6 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
-            // 
-            // encryptDecryptToolStripMenuItem
-            // 
-            this.encryptDecryptToolStripMenuItem.Name = "encryptDecryptToolStripMenuItem";
-            this.encryptDecryptToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.encryptDecryptToolStripMenuItem.Text = "Encrypt/Decrypt";
-            this.encryptDecryptToolStripMenuItem.Click += new System.EventHandler(this.encryptDecryptToolStripMenuItem_Click);
             // 
             // TxtViewer
             // 
@@ -404,8 +407,8 @@
         private ToolStripMenuItem fontColodToolStripMenuItem;
         private ToolStripMenuItem autoSaveToolStripMenuItem;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem replaceToolStripMenuItem;
-        private ToolStripMenuItem checkToolStripMenuItem;
         private ToolStripMenuItem encryptDecryptToolStripMenuItem;
+        private ToolStripMenuItem rightToLeftToolStripMenuItem;
+        private ToolStripMenuItem macrosToolStripMenuItem;
     }
 }

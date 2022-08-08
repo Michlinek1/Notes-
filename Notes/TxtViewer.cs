@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.Devices;
 using Timer = System.Windows.Forms.Timer;
+using System.Linq;
 
 
 namespace Notes
@@ -10,8 +12,8 @@ namespace Notes
     public partial class TxtViewer : Form
     {
         Timer timer = new Timer();
-        float CurrentSize = 8.5f;
-        public static string text = "";
+        float CurrentSize = 8.5f; 
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\macro.txt";
 
         public TxtViewer()
         {
@@ -19,7 +21,11 @@ namespace Notes
             InitializeComponent();
             label2.Text = "0";
             timer.Interval = 2000;
-            textBox1.Text = text;
+            if (!File.Exists(path))
+            {
+                File.Create(path).Close();
+            }
+
 
 
 
@@ -47,9 +53,18 @@ namespace Notes
 
             using (StreamWriter sw = new StreamWriter(Form1.plik))
             {
-                sw.Write(textBox1.Text);
-                sw.Close();
-                sw.Dispose();
+                if (textBox1.Text.StartsWith(".LOG"))
+                {
+                    sw.WriteLine(textBox1.Text + DateTime.Now.ToString());
+                    sw.Close();
+                    sw.Dispose();
+                }
+                else
+                {
+                    sw.Write(textBox1.Text);
+                    sw.Close();
+                    sw.Dispose();
+                }
             }
 
             this.Text = "File has been Saved!";
@@ -75,15 +90,25 @@ namespace Notes
 
             using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName))
             {
-                sw.Write(textBox1.Text);
-                sw.Close();
-                sw.Dispose();
+                if (textBox1.Text.StartsWith(".LOG"))
+                {
+                    sw.WriteLine(textBox1.Text + DateTime.Now.ToString());
+                    sw.Close();
+                    sw.Dispose();
+                }
+                else
+                {
+                    sw.Write(textBox1.Text);
+                    sw.Close();
+                    sw.Dispose();
+                }
             }
 
         }
 
         private void lenghtOfFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(textBox1.Font.Size.ToString());
             if (lenghtOfFileToolStripMenuItem.Checked)
             {
                 label1.Visible = false;
@@ -120,7 +145,7 @@ namespace Notes
             {
                 var convert = int.Parse(labelzoom.Text) - 5;
                 labelzoom.Text = convert.ToString();
-                textBox1.Font = new Font(textBox1.Font.Name, textBox1.Font.Size + 3f);
+                textBox1.Font = new Font(textBox1.Font.Name, textBox1.Font.Size + 0.45f);
                 CurrentSize += 3f;
 
             }
@@ -136,7 +161,7 @@ namespace Notes
             {
                 var convert = int.Parse(labelzoom.Text) + 5;
                 labelzoom.Text = convert.ToString();
-                textBox1.Font = new Font(textBox1.Font.Name, textBox1.Font.Size - 3f);
+                textBox1.Font = new Font(textBox1.Font.Name, textBox1.Font.Size - 0.45f);
                 CurrentSize -= 3f;
             }
             catch (Exception)
@@ -228,28 +253,71 @@ namespace Notes
             textBox1.Text = "";
         }
 
-        private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ReplaceForm replaceform = new ReplaceForm();
-            text = textBox1.Text;
-            replaceform.Show();
-            this.Close();
-        }
-
-        private void checkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(text);
-        }
 
         private void encryptDecryptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(@"C:\Users\Michal\Desktop\zadaniainformatyaa\encryptor\main2.py"))
+            if (!File.Exists(@"C:\Users\Michal\Desktop\zadaniainformatyaa\encryptor\main.py"))
             {
                 MessageBox.Show("You have to download the encryptor from: https://github.com/Michlinek1/Encryptor-Decryptor", "Error!");
                 Process.Start(new ProcessStartInfo("https://github.com/Michlinek1/Encryptor-Decryptor") { UseShellExecute = true });
                 return;
             }
             Process.Start(new ProcessStartInfo(@"C:\Users\Michal\Desktop\zadaniainformatyaa\encryptor\main.py") { UseShellExecute = true });
+        }
+
+        private void rightToLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rightToLeftToolStripMenuItem.Checked)
+            {
+                textBox1.RightToLeft = RightToLeft.Yes;
+            }
+            else
+            {
+                textBox1.RightToLeft = RightToLeft.No;
+            }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    textBox1.Text += File.ReadLines(path).First().ToString();
+                    break;
+                case Keys.F2:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(1).ToString();
+                    break;
+                case Keys.F3:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(2).ToString();
+                    break;
+                case Keys.F4:
+                textBox1.Text += File.ReadLines(path).ElementAtOrDefault(3).ToString();
+                    break;
+                case Keys.F6:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(4).ToString();
+                    break;
+                case Keys.F7:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(5).ToString();
+                    break;
+                case Keys.F8:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(6).ToString();
+                    break;
+                case Keys.F9:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(7).ToString();
+                    break;
+                case Keys.F10:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(8).ToString();
+                    break;
+                case Keys.F11:
+                    textBox1.Text += File.ReadLines(path).ElementAtOrDefault(9).ToString();
+                    break;
+            }
+        }
+
+        private void macrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Macros macrosform = new Macros();
+            macrosform.Show();
         }
     }
     }

@@ -7,7 +7,6 @@ namespace Notes
         public static string plik = "";
         public static string NazwaPliku = "";
 
-
         public Form1()
         {
 
@@ -15,7 +14,6 @@ namespace Notes
             
 
             label1.Visible = false;
-            
 
         }
 
