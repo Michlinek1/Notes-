@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading;
 
 namespace Notes
 {
@@ -6,6 +7,7 @@ namespace Notes
     {
         public static string plik = "";
         public static string NazwaPliku = "";
+        Thread th;
 
         public Form1()
         {
@@ -19,7 +21,6 @@ namespace Notes
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TxtViewer forms2 = new TxtViewer();
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select a file";
             ofd.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
@@ -37,15 +38,17 @@ namespace Notes
             
             label1.Text = ofd.FileName;
             FileInfo fi = new FileInfo(ofd.FileName);
-            Form1 form = new Form1();
             PhotoViewer photoViewer = new PhotoViewer();
             plik = ofd.FileName;
             NazwaPliku = ofd.SafeFileName;
             switch (fi.Extension)
             {
                 case ".txt":
-                    this.Hide();
-                    forms2.Show();
+                    this.Close();
+                    th = new Thread(OpenTxt);
+                    th.SetApartmentState(ApartmentState.STA);
+                    th.Start();
+
                     break;
 
                 case ".png":
@@ -60,7 +63,13 @@ namespace Notes
 
         }
 
+        private void OpenTxt(object obj)
+        {
+            Application.Run(new TxtViewer());
         }
+
+    }
+
     }
 
 

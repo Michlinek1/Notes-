@@ -4,7 +4,6 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
-using Timer = System.Windows.Forms.Timer;
 using System.Linq;
 
 
@@ -12,7 +11,6 @@ namespace Notes
 {
     public partial class TxtViewer : Form
     {
-        Timer timer = new Timer();
         float CurrentSize = 8.5f; 
         string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\macro.txt";
 
