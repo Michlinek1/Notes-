@@ -21,13 +21,10 @@ namespace Notes
             
             InitializeComponent();
             label2.Text = "0";
-            timer.Interval = 2000;
             if (!File.Exists(path))
             {
                 File.Create(path).Close();
             }
-
-
 
 
 
@@ -56,9 +53,15 @@ namespace Notes
             {
                 if (textBox1.Text.StartsWith(".LOG"))
                 {
-                    sw.WriteLine(textBox1.Text + DateTime.Now.ToString());
+                    sw.WriteLine(textBox1.Text +  "\n" + DateTime.Now.ToString());
                     sw.Close();
                     sw.Dispose();
+                }
+                else if (textBox1.Text.StartsWith(".INFO"))
+                {
+                    FileInfo fi = new FileInfo(Form1.plik);
+                    DateTime plikstworzenie = fi.CreationTime;
+                    sw.WriteLine(textBox1.Text + "\n" + "File has been created in:" + " " + plikstworzenie.ToString());
                 }
                 else
                 {
@@ -96,6 +99,12 @@ namespace Notes
                     sw.WriteLine(textBox1.Text + DateTime.Now.ToString());
                     sw.Close();
                     sw.Dispose();
+                }
+                else if (textBox1.Text.StartsWith(".INFO"))
+                {
+                    FileInfo fi = new FileInfo(Form1.plik);
+                    DateTime plikstworzenie = fi.CreationTime;
+                    sw.WriteLine(textBox1.Text + "\n" + "File has been created in:" + " " + plikstworzenie.ToString());
                 }
                 else
                 {
@@ -241,13 +250,16 @@ namespace Notes
 
         private void autoSaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if(autoSaveToolStripMenuItem.Checked)
-                timer.Stop();
-                using StreamWriter sw = new StreamWriter(Form1.plik);
-                sw.Write(textBox1.Text);
-                timer.Start();
+            if (autoSaveToolStripMenuItem.Checked)
+            {
+                timer1.Start();
+                using (StreamWriter sw = new StreamWriter(Form1.plik))
+                {
+                    sw.Write(textBox1.Text);
+                }
+                
             }
+        }
 
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {

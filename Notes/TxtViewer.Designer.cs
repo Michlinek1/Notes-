@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -65,6 +66,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -352,7 +354,6 @@
             // 
             // macrosToolStripMenuItem
             // 
-            this.macrosToolStripMenuItem.CheckOnClick = true;
             this.macrosToolStripMenuItem.Name = "macrosToolStripMenuItem";
             this.macrosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.macrosToolStripMenuItem.Text = "Macros";
@@ -379,6 +380,11 @@
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += new System.EventHandler(this.autoSaveToolStripMenuItem_Click);
             // 
             // TxtViewer
             // 
@@ -442,5 +448,6 @@
         private ToolStripMenuItem printToolStripMenuItem;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PrintDialog printDialog1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
